@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class ExplosiveObstacle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject explosionPrefab;
+    public int damage = 20;
+
+    void OnCollisionEnter(Collision target)
     {
-        
+     if (target.gameObject.tag == "Player")
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
+        if (target.gameObject.tag == "Bullet")
+        {
+            Instantiate(explosionPrefab, transform.position, Quaternion.identity);
+            gameObject.SetActive(false);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
