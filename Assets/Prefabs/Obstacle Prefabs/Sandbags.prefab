@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3445845542769463400}
   - component: {fileID: 3445845542770463400}
   - component: {fileID: 3113395346663896751}
+  - component: {fileID: 114395575202913512}
   m_Layer: 0
   m_Name: Sandbags
   m_TagString: Untagged
@@ -91,3 +92,15 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.6, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: -1.04}
+--- !u!114 &114395575202913512
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3445845542768266344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050135e4078364f4bb0dc46590ca16ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

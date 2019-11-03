@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6902025779006761601}
   - component: {fileID: 7310520314882338461}
   - component: {fileID: 4206883440247434502}
+  - component: {fileID: 114944841931541830}
   m_Layer: 0
   m_Name: FuelTankLarge
   m_TagString: Untagged
@@ -188,3 +189,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &114944841931541830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6902025779009025089}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 050135e4078364f4bb0dc46590ca16ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
