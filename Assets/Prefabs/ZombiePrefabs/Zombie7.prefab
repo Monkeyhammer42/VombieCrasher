@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 8539666493048394578}
   - component: {fileID: 5146712107994703939}
   - component: {fileID: 3436551525501107648}
+  - component: {fileID: 6743559480815099863}
   m_Layer: 0
   m_Name: Zombie7
   m_TagString: Untagged
@@ -62,6 +63,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.41, y: 0.8, z: 0.22}
   m_Center: {x: 0, y: 0.4, z: 0}
+--- !u!114 &6743559480815099863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8409109803068100525}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fff86f8bbc759da49bd67e3e98b4a4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodFXPrefab: {fileID: 1690365919121730, guid: 01905950d6bb84877a984f64b83d6c2d,
+    type: 3}
+  speed: 1
 --- !u!1001 &4766688850409941686
 PrefabInstance:
   m_ObjectHideFlags: 0

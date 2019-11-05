@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\HelperScripts\GameplayController.cs" />
     <Compile Include="Assets\Scripts\ObstacleScripts\DestroyAfterTime.cs" />
     <Compile Include="Assets\Scripts\ObstacleScripts\ExplosiveObstacle.cs" />
+    <Compile Include="Assets\Scripts\ObstacleScripts\ZombieScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\BaseScript.cs" />
     <Compile Include="Assets\Scripts\PlayerScripts\PlayerController.cs" />
     <None Include="Assets\Models\Military\Materials\UnlitVertexColour_Alpha.shader" />

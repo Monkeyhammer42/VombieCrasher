@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class DestroyAfterTime : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float timer = 3f;
+
     void Start()
     {
-        
+        Invoke("DeactivateGameObject", timer);
     }
 
     // Update is called once per frame
-    void Update()
+    void DeactivateGameObject()
     {
-        
+        gameObject.SetActive(false);
     }
 }
