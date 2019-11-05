@@ -5,19 +5,26 @@ using UnityEngine;
 public class ZombieScript : MonoBehaviour
 {
     public GameObject bloodFXPrefab;
-    public float speed = 1f;
+    private float speed = 1f;
     private Rigidbody myBody;
+    private bool isAlive;
     void Start()
     {
         myBody = GetComponent<Rigidbody>();
-        myBody.velocity = new Vector3(0f, 0f, -speed);
+        isAlive = true;
+        speed = Random.Range(1f, 5f);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (isAlive)
+        {
+            myBody.velocity = new Vector3(0f, 0f, -speed);
+        }
         if (transform.position.y < -10f)
         {
+
             gameObject.SetActive(false);
         }
     }
@@ -25,6 +32,7 @@ public class ZombieScript : MonoBehaviour
 
     void Die()
     {
+        isAlive = false;
         myBody.velocity = Vector3.zero;
         GetComponent<Collider>().enabled = false;
         GetComponentInChildren<Animator>().Play("Idle");
