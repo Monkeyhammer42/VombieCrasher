@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : BaseScript
 {
@@ -9,15 +10,23 @@ public class PlayerController : BaseScript
     public Transform bullet_StartPoint;
     public GameObject bullet_Prefab;
     public ParticleSystem shootFX;
+    
+    private Animator shootSliderAnim;
+
+    [HideInInspector]
+    public bool canShoot;
     void Start()
     {
         myBody = GetComponent<Rigidbody>();
+        GameObject.Find("ShootButton").GetComponent<Button>().onClick.AddListener(ShootingControl);
+        canShoot = true;
+        shootSliderAnim = GameObject.Find("FireBar").GetComponent<Animator>();
     }
     void Update()
     {
         ControlMovementWithKeyboard();
         ChangeRotation();
-        ShootingControl();
+       
     }
 
     void FixedUpdate()
@@ -82,11 +91,17 @@ public class PlayerController : BaseScript
     }
     public void ShootingControl()
     {
-        if (Input.GetMouseButtonDown(0))
+      
+            if(Time.timeScale != 0)
         {
-            GameObject bullet = Instantiate(bullet_Prefab, bullet_StartPoint.position, Quaternion.identity);
-            bullet.GetComponent<BulletScript>().Move(2000f);
-            shootFX.Play();
+            if (canShoot)
+            {
+                GameObject bullet = Instantiate(bullet_Prefab, bullet_StartPoint.position, Quaternion.identity);
+                bullet.GetComponent<BulletScript>().Move(2000f);
+                shootFX.Play();
+                canShoot = false;
+                shootSliderAnim.Play("FadeIn");
+            }
         }
     }
 
