@@ -41,7 +41,7 @@ public class PlayerController : BaseScript
     }
     void ControlMovementWithKeyboard()
     {
-        if(Input.GetKey(KeyCode.LeftArrow)|| Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
         {
             MoveLeft();
         }
