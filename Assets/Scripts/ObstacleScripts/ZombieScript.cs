@@ -36,7 +36,7 @@ public class ZombieScript : MonoBehaviour
         myBody.velocity = Vector3.zero;
         GetComponent<Collider>().enabled = false;
         GetComponentInChildren<Animator>().Play("Idle");
-
+        GetComponentInChildren<AudioSource>().Play();
         transform.rotation = Quaternion.Euler(90f, 0f, 0f);
         transform.localScale = new Vector3(1f, 1f, 0.2f);
         transform.position = new Vector3(transform.position.x, 0.2f, transform.position.z);
@@ -54,6 +54,7 @@ public class ZombieScript : MonoBehaviour
             Instantiate(bloodFXPrefab, transform.position, Quaternion.identity);
 
             Invoke("DeactivateGameObject", 3f);
+            GameplayController.instance.IncreaseScore();
             Die();
         }
     }

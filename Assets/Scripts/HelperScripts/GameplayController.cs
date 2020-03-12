@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameplayController : MonoBehaviour
 {
@@ -11,11 +13,24 @@ public class GameplayController : MonoBehaviour
     public Transform[] lanes;
     public float min_ObstacleDelay = 10f, max_ObstacleDelay = 40f;
     private float halfGroundSize;
-    private BaseScript playerController; 
-    
-     void Awake()
+    private BaseScript playerController;
+
+    private Text score_Text;
+    private int zombie_Kill_Count;
+
+    [SerializeField]
+    private GameObject pausePanel;
+    [SerializeField]
+    private GameObject controlPanel;
+    [SerializeField]
+    private GameObject gameover_Panel;
+    [SerializeField]
+    private Text FinalScore;
+
+    void Awake()
     {
         MakeInstance();
+        Time.timeScale = 1;
     }
 
 
@@ -24,6 +39,7 @@ public class GameplayController : MonoBehaviour
         halfGroundSize = GameObject.Find("GroundBlock Main").GetComponent<GroundBlockScript>().halfLength;
         playerController = GameObject.FindGameObjectWithTag("Player").GetComponent<BaseScript>();
         StartCoroutine("GenerateObstacles");
+        score_Text = GameObject.Find("ScoreText").GetComponent<Text>();
     }
 
 
@@ -33,7 +49,8 @@ public class GameplayController : MonoBehaviour
         {
             instance = this;
 
-        }else if (instance != null)
+        }
+        else if (instance != null)
         {
             Destroy(gameObject);
         }
@@ -52,21 +69,23 @@ public class GameplayController : MonoBehaviour
         {
             int obstacleLane = Random.Range(0, lanes.Length);
 
-            AddObstacle (new Vector3(lanes[obstacleLane].transform.position.x, 0f, zPos),Random.Range(0,obstaclePrefabs.Length));
+            AddObstacle(new Vector3(lanes[obstacleLane].transform.position.x, 0f, zPos), Random.Range(0, obstaclePrefabs.Length));
 
 
             int zombieLane = 0;
             if (obstacleLane == 0)
             {
-                zombieLane = Random.Range(0, 2) == 1 ? 1 : 2;
-            }else if (obstacleLane == 1)
+                zombieLane = Random.Range(0, 2) == 1 ? 2 : 1;
+            }
+            else if (obstacleLane == 1)
             {
                 zombieLane = Random.Range(0, 2) == 1 ? 0 : 2;
-            }else if (obstacleLane == 2)
-            {
-                zombieLane = Random.Range(0, 2) == 1 ? 1 : 0;
             }
-            AddZombies(new Vector3(lanes[zombieLane].transform.position.x,0.15f,zPos));
+            else if (obstacleLane == 2)
+            {
+                zombieLane = Random.Range(0, 2) == 1 ?  0 : 1;
+            }
+            AddZombies(new Vector3(lanes[zombieLane].transform.position.x, 0.15f, zPos));
         }
     }
     void AddObstacle(Vector3 position, int type)
@@ -99,16 +118,54 @@ public class GameplayController : MonoBehaviour
     }
 
 
-    void AddZombies (Vector3 pos)
+    void AddZombies(Vector3 pos)
     {
         int count = Random.Range(0, 3) + 1;
-        for (int i =0; i< count; i++)
+        for (int i = 0; i < count; i++)
         {
             Vector3 shift = new Vector3(Random.Range(-0.5f, 0.5f), 0f, Random.Range(1f, 10f) * i);
             Instantiate(zombiePrefabs[Random.Range(0, zombiePrefabs.Length)], pos + shift * i, Quaternion.identity);
         }
     }
+    public void IncreaseScore()
+    {
+        zombie_Kill_Count++;
+        score_Text.text = zombie_Kill_Count.ToString();
 
+    }
+    public void PauseGame()
+    {
+        pausePanel.SetActive(true);
+        Time.timeScale = 0.00001f;
+    }
+    public void ResumeGame()
+    {
+        pausePanel.SetActive(false);
+        Time.timeScale = 1f;
+    }
+    public void ExitGame()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void GameOver()
+    {
+        Time.timeScale = 0.00001F;
+        gameover_Panel.SetActive(true);
+        FinalScore.text ="Killed: " +zombie_Kill_Count;
 
-
+    }
+    public void OpenControls()
+    {
+        controlPanel.SetActive(true);
+    }
+    public void CloseControls()
+    {
+        controlPanel.SetActive(false);
+    }
+    public void Restart()
+    {
+        Time.timeScale = 0.00001F;
+        SceneManager.LoadScene("GamePlay");
+    }
 }
