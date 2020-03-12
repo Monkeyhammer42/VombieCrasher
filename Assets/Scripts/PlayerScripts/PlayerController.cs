@@ -19,6 +19,7 @@ public class PlayerController : BaseScript
     {
         myBody = GetComponent<Rigidbody>();
         GameObject.Find("ShootButton").GetComponent<Button>().onClick.AddListener(ShootingControl);
+      
         canShoot = true;
         shootSliderAnim = GameObject.Find("FireBar").GetComponent<Animator>();
     }
@@ -98,6 +99,7 @@ public class PlayerController : BaseScript
             {
                 GameObject bullet = Instantiate(bullet_Prefab, bullet_StartPoint.position, Quaternion.identity);
                 bullet.GetComponent<BulletScript>().Move(2000f);
+                GetComponent<AudioSource>().Play();
                 shootFX.Play();
                 canShoot = false;
                 shootSliderAnim.Play("FadeIn");
